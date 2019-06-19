@@ -19,13 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zcj.test1.Test1Activity;
+import com.zcj.test2.Test2Activity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static final String GLOBAL_TAG = "zcjLog";
 
     private RecyclerView mRv;
     private List<Class> mData = new ArrayList<>();
@@ -49,15 +48,38 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.onDraw(c, parent, state);
-                rectF.set(0, 0, parent.getWidth(), padding);
-                paint.setStyle(Paint.Style.FILL);
-                paint.setColor(Color.parseColor("#88f9aa"));
-                c.drawRect(rectF, paint);
+                int childCount = parent.getChildCount();
+                for (int i = 0; i < childCount; i++) {
+                    View child = parent.getChildAt(i);
+                    int left = 0;
+                    int right = parent.getWidth();
+                    int top = child.getBottom();
+                    int bottom = top + padding;
+                    rectF.set(left, top, right, bottom);
+                    paint.setStyle(Paint.Style.FILL);
+                    paint.setColor(Color.parseColor("#88f9aa"));
+                    c.drawRect(rectF, paint);
+
+                    int position = parent.getChildAdapterPosition(child);
+                    if (position == 0) {
+                        left = 0;
+                        right = parent.getWidth();
+                        top = 0;
+                        bottom = child.getTop();
+                        rectF.set(left, top, right, bottom);
+                        c.drawRect(rectF, paint);
+                    }
+                }
             }
 
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                outRect.set(0, padding, 0, padding);
+                int position = parent.getChildAdapterPosition(view);
+                if (position == 0) {
+                    outRect.set(0, padding, 0, padding);
+                } else {
+                    outRect.set(0, 0, 0, padding);
+                }
             }
         });
     }
@@ -65,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private void createData() {
         mData.clear();
         mData.add(Test1Activity.class);
+        mData.add(Test2Activity.class);
     }
 
     private class ClickListener implements View.OnClickListener {

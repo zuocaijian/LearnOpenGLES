@@ -7,4 +7,7 @@
 1. test1 三角形
   参考资料：
     - 专栏博文 [Android OpenGLES2.0（二）——绘制一个三角形](https://blog.csdn.net/junzia/article/details/52801772)
-2. to be continue
+2. test2 等腰直角三角形和彩色的三角形
+  参考资料：
+    - 专栏博文 [Android OpenGLES2.0（三）——等腰直角三角形和彩色的三角形](https://blog.csdn.net/junzia/article/details/52817978)
+3. to be continue
