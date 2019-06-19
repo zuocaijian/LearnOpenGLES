@@ -12,21 +12,26 @@ import javax.microedition.khronos.opengles.GL10;
 public class Test1Render implements GLSurfaceView.Renderer {
 
     private Triangle mTriangle;
+    private Lines mLines;
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         Test1Util.checkGLES20Env("onSurfaceCreated error!");
         mTriangle = new Triangle();
         mTriangle.init();
+        mLines = new Lines();
+        mLines.init();
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         mTriangle.resize(width, height);
+        mLines.resize(width, height);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
         mTriangle.draw();
+        mLines.draw();
     }
 }
