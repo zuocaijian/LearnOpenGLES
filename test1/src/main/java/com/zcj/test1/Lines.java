@@ -49,8 +49,8 @@ public class Lines {
         mVertexBuffer.put(mLinesCoords);
         mVertexBuffer.position(0);
         //加载顶点着色器和片元着色器
-        int vertexShader = Test1Util.loadShader(Test1Activity.APP.getResources(), GLES20.GL_VERTEX_SHADER, "shader_vertex_line.glsl");
-        int fragmentShader = Test1Util.loadShader(Test1Activity.APP.getResources(), GLES20.GL_FRAGMENT_SHADER, "shader_fragment_line.glsl");
+        int vertexShader = Test1Util.loadShader(Test1Activity.APP.getResources(), GLES20.GL_VERTEX_SHADER, "t1_shader_vertex_line.glsl");
+        int fragmentShader = Test1Util.loadShader(Test1Activity.APP.getResources(), GLES20.GL_FRAGMENT_SHADER, "t1_shader_fragment_line.glsl");
         //创建着色器程序
         mProgram = Test1Util.createOpenGLESProgram(vertexShader, fragmentShader);
     }

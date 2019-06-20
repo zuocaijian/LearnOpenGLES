@@ -8,6 +8,7 @@
     <application>
         <activity
             android:name=".Test1Activity"
+            android:label="三角形"
             android:screenOrientation="portrait" />
     </application>
 

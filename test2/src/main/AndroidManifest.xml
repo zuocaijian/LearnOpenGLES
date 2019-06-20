@@ -9,6 +9,7 @@
 
         <activity
             android:name=".Test2Activity"
+            android:label="等腰三角形和彩色三角形"
             android:screenOrientation="portrait" />
 
     </application>
