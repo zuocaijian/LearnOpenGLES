@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zcj.test1.Test1Activity;
 import com.zcj.test2.Test2Activity;
+import com.zcj.test3.Test3Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mData.clear();
         mData.add(Test1Activity.class);
         mData.add(Test2Activity.class);
+        mData.add(Test3Activity.class);
     }
 
     private class ClickListener implements View.OnClickListener {
