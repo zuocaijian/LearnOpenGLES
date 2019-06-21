@@ -20,4 +20,7 @@
 4. test4 立方体
   参考资料： 
     - 专栏博文 [Android OpenGLES2.0（五）——绘制立方体](https://blog.csdn.net/junzia/article/details/52820177)
-5. to be continue
+5. test5 圆锥、圆柱和球体
+  参考资料：
+    - 专栏博文 [Android OpenGLES2.0（六）——构建圆锥、圆柱和球体](https://blog.csdn.net/junzia/article/details/52826856)
+6. to be continue
