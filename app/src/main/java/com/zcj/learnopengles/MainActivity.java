@@ -22,6 +22,7 @@ import com.zcj.test1.Test1Activity;
 import com.zcj.test2.Test2Activity;
 import com.zcj.test3.Test3Activity;
 import com.zcj.test4.Test4Activity;
+import com.zcj.test5.Test5Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add(Test2Activity.class);
         mData.add(Test3Activity.class);
         mData.add(Test4Activity.class);
+        mData.add(Test5Activity.class);
     }
 
     private class ClickListener implements View.OnClickListener {

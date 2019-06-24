@@ -31,4 +31,5 @@ dependencies {
     implementation project(path: ':test2')
     implementation project(path: ':test3')
     implementation project(path: ':test4')
+    implementation project(path: ':test5')
 }
