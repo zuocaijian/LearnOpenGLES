@@ -13,6 +13,8 @@ import javax.microedition.khronos.opengles.GL10;
 public class Test5Render implements GLSurfaceView.Renderer {
 
     private Sphere mSphere;
+    private Cylinder mCylinder;
+    private Cone mCone;
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -21,16 +23,27 @@ public class Test5Render implements GLSurfaceView.Renderer {
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
         mSphere = new Sphere();
         mSphere.init();
+
+        mCylinder = new Cylinder();
+        mCylinder.init();
+
+        mCone = new Cone();
+        mCone.init();
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         mSphere.resize(width, height);
+        mCylinder.resize(width, height);
+        mCone.resize(width, height);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-        mSphere.draw();
+        //mSphere.draw();
+        //mCylinder.draw();
+
+        mCone.draw();
     }
 }

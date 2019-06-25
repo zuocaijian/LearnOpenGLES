@@ -10,41 +10,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author: cj_zuo
- * Date: 2019/6/25 18:15
+ * Created by zcj on 2019/6/25 23:08
  * <p>
- * 绘制圆柱
+ * 绘制圆锥
  */
-public class Cylinder {
+public class Cone {
 
-    private final float[] mCylinderPositions;
+    private final float[] mVertexPositions;
     private final int COORDS_PER_VERTEX = 3;
     private final int vertexStride = COORDS_PER_VERTEX * 4;
     private final int vertexCount;
 
     private FloatBuffer mVertexBuffer;
     private int mProgram;
-    private int mPositionHandler;
+    private int mPostionHandler;
     private int mMatrixHandler;
 
     private float[] mProjectionMatrix = new float[16];
     private float[] mViewMatrix = new float[16];
     private float[] mMVPMatrix = new float[16];
 
-    public Cylinder() {
-        mCylinderPositions = createPositions(1.0f);
-        vertexCount = mCylinderPositions.length / COORDS_PER_VERTEX;
+    public Cone() {
+        mVertexPositions = createPositions(1.0f);
+        vertexCount = mVertexPositions.length / COORDS_PER_VERTEX;
     }
 
     public void init() {
-        ByteBuffer bb = ByteBuffer.allocateDirect(mCylinderPositions.length * 4);
+        ByteBuffer bb = ByteBuffer.allocateDirect(mVertexPositions.length * 4);
         bb.order(ByteOrder.nativeOrder());
         mVertexBuffer = bb.asFloatBuffer();
-        mVertexBuffer.put(mCylinderPositions);
+        mVertexBuffer.put(mVertexPositions);
         mVertexBuffer.position(0);
 
-        int vertexShader = Test5Util.loadShader(Test5Activity.APP.getResources(), GLES20.GL_VERTEX_SHADER, "t5_shader_vertex_cylinder.glsl");
-        int fragmentShader = Test5Util.loadShader(Test5Activity.APP.getResources(), GLES20.GL_FRAGMENT_SHADER, "t5_shader_fragment_cylinder.glsl");
+        int vertexShader = Test5Util.loadShader(Test5Activity.APP.getResources(), GLES20.GL_VERTEX_SHADER, "t5_shader_vertex_cone.glsl");
+        int fragmentShader = Test5Util.loadShader(Test5Activity.APP.getResources(), GLES20.GL_FRAGMENT_SHADER, "t5_shader_fragment_cone.glsl");
         mProgram = Test5Util.createOpenGLESProgram(vertexShader, fragmentShader);
     }
 
@@ -57,28 +56,29 @@ public class Cylinder {
 
     public void draw() {
         GLES20.glUseProgram(mProgram);
-        mPositionHandler = GLES20.glGetAttribLocation(mProgram, "vPosition");
-        GLES20.glEnableVertexAttribArray(mPositionHandler);
-        GLES20.glVertexAttribPointer(mPositionHandler, COORDS_PER_VERTEX,
-                GLES20.GL_FLOAT, false, vertexStride, mVertexBuffer);
+        mPostionHandler = GLES20.glGetAttribLocation(mProgram, "vPosition");
+        GLES20.glEnableVertexAttribArray(mPostionHandler);
+        GLES20.glVertexAttribPointer(mPostionHandler, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
+                false, vertexStride, mVertexBuffer);
         mMatrixHandler = GLES20.glGetUniformLocation(mProgram, "vMatrix");
         GLES20.glUniformMatrix4fv(mMatrixHandler, 1, false, mMVPMatrix, 0);
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, vertexCount);
-        GLES20.glDisableVertexAttribArray(mPositionHandler);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vertexCount);
+        GLES20.glDisableVertexAttribArray(mPostionHandler);
     }
 
     private float[] createPositions(float step) {
         List<Float> data = new ArrayList<>();
-        float radius = 1.0f;
         float height = 2.0f;
+        float radius = 1.0f;
+        data.add(0.0f);
+        data.add(0.0f);
+        data.add(height);
         for (float i = 0; i < 360f + step; i += step) {
             data.add((float) (radius * Math.cos(i * Math.PI / 180f)));
             data.add((float) (radius * Math.sin(i * Math.PI / 180f)));
-            data.add(height);
-            data.add((float) (radius * Math.cos(i * Math.PI / 180f)));
-            data.add((float) (radius * Math.sin(i * Math.PI / 180f)));
-            data.add(0f);
+            data.add(0.0f);
         }
+
         float[] positions = new float[data.size()];
         for (int j = 0; j < data.size(); j++) {
             positions[j] = data.get(j);

@@ -1,6 +1,6 @@
 attribute vec4 vPosition;
-uniform mat4 vMatrix;
 varying vec4 vColor;
+uniform mat4 vMatrix;
 
 void main()
 {
