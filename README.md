@@ -23,4 +23,10 @@
 5. test5 圆锥、圆柱和球体
   参考资料：
     - 专栏博文 [Android OpenGLES2.0（六）——构建圆锥、圆柱和球体](https://blog.csdn.net/junzia/article/details/52826856)
-6. to be continue
+    - 《OpenGL ES应用开发实践指南 Android卷》第8章第8.6小节：关于模型矩阵、视图矩阵、**投影矩阵**
+6. test6 2D纹理贴图
+  参考资料：
+    - 专栏博文 [Android OpenGLES2.0（八）——纹理贴图之显示图片](https://blog.csdn.net/junzia/article/details/52842816)
+    - 《OpenGL ES应用开发实践指南 Android卷》第7章：绘制纹理的流程和代码细节
+    - [Android OpenGL 纹理坐标原点位置](https://www.jianshu.com/p/6c4c7426eef3)：探究Android中OpenGL ES纹理坐标原点
+7. to be continue
