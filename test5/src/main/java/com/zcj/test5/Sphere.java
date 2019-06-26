@@ -31,6 +31,7 @@ public class Sphere {
 
     private float[] mProjectionMatrix = new float[16];
     private float[] mViewMatrix = new float[16];
+    private float[] mModelMatrix = new float[16];
     private float[] mMVPMatrix = new float[16];
 
     public Sphere() {
@@ -53,8 +54,13 @@ public class Sphere {
     public void resize(int width, int height) {
         float ratio = (float) width / height;
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3.0f, 15.0f);
-        Matrix.setLookAtM(mViewMatrix, 0, 1.0f, -6.0f, -3.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
+        Matrix.setLookAtM(mViewMatrix, 0, 1.0f, -6.0f, -6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        Matrix.setIdentityM(mModelMatrix, 0);
+        Matrix.translateM(mModelMatrix, 0, 0, 3.5f, 0);
+
+        float[] tmpMatrix = new float[16];
+        Matrix.multiplyMM(tmpMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
+        Matrix.multiplyMM(mMVPMatrix, 0, tmpMatrix, 0, mModelMatrix, 0);
     }
 
     public void draw() {

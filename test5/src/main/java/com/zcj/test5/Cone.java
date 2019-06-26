@@ -23,11 +23,12 @@ public class Cone {
 
     private FloatBuffer mVertexBuffer;
     private int mProgram;
-    private int mPostionHandler;
+    private int mPositionHandler;
     private int mMatrixHandler;
 
     private float[] mProjectionMatrix = new float[16];
     private float[] mViewMatrix = new float[16];
+    private float[] mModelMatrix = new float[16];
     private float[] mMVPMatrix = new float[16];
 
     public Cone() {
@@ -50,20 +51,25 @@ public class Cone {
     public void resize(int width, int height) {
         float ratio = (float) width / height;
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3.0f, 20.f);
-        Matrix.setLookAtM(mViewMatrix, 0, 1.0f, -10.0f, -4.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
+        Matrix.setLookAtM(mViewMatrix, 0, 8.0f, -4.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        Matrix.setIdentityM(mModelMatrix, 0);
+        Matrix.translateM(mModelMatrix, 0, 0, -0.5f, 0);
+
+        float[] tmpMatrix = new float[16];
+        Matrix.multiplyMM(tmpMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
+        Matrix.multiplyMM(mMVPMatrix, 0, tmpMatrix, 0, mModelMatrix, 0);
     }
 
     public void draw() {
         GLES20.glUseProgram(mProgram);
-        mPostionHandler = GLES20.glGetAttribLocation(mProgram, "vPosition");
-        GLES20.glEnableVertexAttribArray(mPostionHandler);
-        GLES20.glVertexAttribPointer(mPostionHandler, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
+        mPositionHandler = GLES20.glGetAttribLocation(mProgram, "vPosition");
+        GLES20.glEnableVertexAttribArray(mPositionHandler);
+        GLES20.glVertexAttribPointer(mPositionHandler, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
                 false, vertexStride, mVertexBuffer);
         mMatrixHandler = GLES20.glGetUniformLocation(mProgram, "vMatrix");
         GLES20.glUniformMatrix4fv(mMatrixHandler, 1, false, mMVPMatrix, 0);
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, vertexCount);
-        GLES20.glDisableVertexAttribArray(mPostionHandler);
+        GLES20.glDisableVertexAttribArray(mPositionHandler);
     }
 
     private float[] createPositions(float step) {
@@ -71,12 +77,12 @@ public class Cone {
         float height = 2.0f;
         float radius = 1.0f;
         data.add(0.0f);
-        data.add(0.0f);
         data.add(height);
+        data.add(0.0f);
         for (float i = 0; i < 360f + step; i += step) {
             data.add((float) (radius * Math.cos(i * Math.PI / 180f)));
-            data.add((float) (radius * Math.sin(i * Math.PI / 180f)));
             data.add(0.0f);
+            data.add((float) (radius * Math.sin(i * Math.PI / 180f)));
         }
 
         float[] positions = new float[data.size()];

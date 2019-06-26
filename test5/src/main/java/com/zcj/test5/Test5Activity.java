@@ -33,6 +33,11 @@ public class Test5Activity extends AppCompatActivity {
         mGLSurfaceView = new GLSurfaceView(getBaseContext());
         mRender = new Test5Render();
         mGLSurfaceView.setEGLContextClientVersion(2);
+
+        /*//设置GLSurfaceView支持透明通道
+        mGLSurfaceView.setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+        mGLSurfaceView.getHolder().setFormat(PixelFormat.TRANSLUCENT);*/
+
         mGLSurfaceView.setRenderer(mRender);
         mGLSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
