@@ -31,5 +31,9 @@
     - [Android OpenGL 纹理坐标原点位置](https://www.jianshu.com/p/6c4c7426eef3)：探究Android中OpenGL ES纹理坐标原点
 7. test7 处理图片(图片滤镜)
   参考资料：
-    - 专栏博文 [Android OpenGLES2.0（九）——利用OpenGL进行图片处理](https://blog.csdn.net/junzia/article/details/52902189)  
-8. to be continue
+    - 专栏博文 [Android OpenGLES2.0（九）——利用OpenGL进行图片处理](https://blog.csdn.net/junzia/article/details/52902189)
+    - 图像黑白滤镜参数来自著名的色彩心理学公式：Gray = R*0.299 + G*0.587 + B*0.114  
+8. test8 使用矩阵完成OpenGL中的平移、旋转、缩放
+  参考资料：
+    - 专栏博文 [Android OpenGLES2.0（十）——OpenGL中的平移、旋转、缩放](https://blog.csdn.net/junzia/article/details/53154175)
+9. to be continue

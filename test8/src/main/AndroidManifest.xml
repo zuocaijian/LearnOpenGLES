@@ -1,17 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zcj.test7">
+    package="com.zcj.test8">
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true" />
+        android:required="false" />
 
     <application>
-
         <activity
-            android:name=".Test7Activity"
-            android:label="图片处理(黑白、模糊等滤镜)"
+            android:name=".Test8Activity"
+            android:label="OpenGL 中的平移、缩放和旋转"
             android:screenOrientation="portrait" />
-
     </application>
 
 </manifest>

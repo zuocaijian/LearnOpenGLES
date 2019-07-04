@@ -25,6 +25,7 @@ import com.zcj.test4.Test4Activity;
 import com.zcj.test5.Test5Activity;
 import com.zcj.test6.Test6Activity;
 import com.zcj.test7.Test7Activity;
+import com.zcj.test8.Test8Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add(Test5Activity.class);
         mData.add(Test6Activity.class);
         mData.add(Test7Activity.class);
+        mData.add(Test8Activity.class);
     }
 
     private class ClickListener implements View.OnClickListener {
