@@ -36,4 +36,5 @@
 8. test8 使用矩阵完成OpenGL中的平移、旋转、缩放
   参考资料：
     - 专栏博文 [Android OpenGLES2.0（十）——OpenGL中的平移、旋转、缩放](https://blog.csdn.net/junzia/article/details/53154175)
+    - 使用模型矩阵将坐标变换到世界空间时，注意矩阵的乘法顺序（与通常我们思考的顺序相反）。
 9. to be continue

@@ -85,19 +85,20 @@ public class MatrixOperator {
 
         pushMatrix();
         Matrix.setIdentityM(mModelMatrix, 0);
+        Matrix.rotateM(mModelMatrix, 0, 60, 1, 2, 1);
         Matrix.translateM(mModelMatrix, 0, 2, 2, -3);
         calcMVPMatrix();
         drawSelf();
         popMatrix();
 
-        /*pushMatrix();
+        pushMatrix();
         Matrix.setIdentityM(mModelMatrix, 0);
-        Matrix.translateM(mModelMatrix, 0, 12, 0, 0);
-        Matrix.scaleM(mModelMatrix, 0, 1.0f, 2.0f, 1.0f);
-        Matrix.rotateM(mModelMatrix, 0, 30f, 1, 2, 1);
+        Matrix.scaleM(mModelMatrix, 0, 1.2f, 1.2f, 0.5f);
+        Matrix.rotateM(mModelMatrix, 0, 60, -1, -2, 1);
+        Matrix.translateM(mModelMatrix, 0, -2, -2, -3);
         calcMVPMatrix();
         drawSelf();
-        popMatrix();*/
+        popMatrix();
     }
 
     private void drawSelf() {
