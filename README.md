@@ -20,6 +20,7 @@
 4. test4 立方体
   参考资料： 
     - 专栏博文 [Android OpenGLES2.0（五）——绘制立方体](https://blog.csdn.net/junzia/article/details/52820177)
+    - [《OpenGL 学习系列---观察矩阵》](https://glumes.com/post/opengl/opengl-tutorial-view-matrix/)#确定相机位置：解释了设置观察矩阵时up参数的意义
 5. test5 圆锥、圆柱和球体
   参考资料：
     - 专栏博文 [Android OpenGLES2.0（六）——构建圆锥、圆柱和球体](https://blog.csdn.net/junzia/article/details/52826856)
