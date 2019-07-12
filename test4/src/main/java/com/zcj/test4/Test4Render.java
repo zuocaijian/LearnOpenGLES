@@ -29,4 +29,12 @@ public class Test4Render implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         mCube.draw();
     }
+
+    public void setLookAt(float eyeX, float eyeY, float eyeZ,
+                          float centerX, float centerY, float centerZ,
+                          float upX, float upY, float upZ) {
+        mCube.setLookAt(eyeX, eyeY, eyeZ,
+                centerX, centerY, centerZ,
+                upX, upY, upZ);
+    }
 }
