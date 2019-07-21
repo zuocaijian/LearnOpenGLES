@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zcj.test1.Test1Activity;
+import com.zcj.test10.Test10Activity;
 import com.zcj.test2.Test2Activity;
 import com.zcj.test3.Test3Activity;
 import com.zcj.test4.Test4Activity;
@@ -26,6 +27,7 @@ import com.zcj.test5.Test5Activity;
 import com.zcj.test6.Test6Activity;
 import com.zcj.test7.Test7Activity;
 import com.zcj.test8.Test8Activity;
+import com.zcj.test9.Test9Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
         mData.add(Test6Activity.class);
         mData.add(Test7Activity.class);
         mData.add(Test8Activity.class);
+        mData.add(Test9Activity.class);
+        mData.add(Test10Activity.class);
     }
 
     private class ClickListener implements View.OnClickListener {

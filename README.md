@@ -41,4 +41,8 @@
 9. test9 使用OpenGLES做Camera预览
   参考资料：
     - 专栏博文 [Android OpenGLES2.0（十一）——利用OpenGLES做Camera预览](https://blog.csdn.net/junzia/article/details/53166332)
-10. to be continue
+10. test10 FBO离屏渲染
+  参考资料： 
+    - 专栏博文 [FBO离屏渲染](https://blog.csdn.net/junzia/article/details/53861519)
+    - 关于帧缓冲、渲染缓冲等概念、作用详解：[高级OpenGL-05.帧缓冲（Framebuffers）](https://www.jianshu.com/p/29a7dde7d21f)
+11. to be continue

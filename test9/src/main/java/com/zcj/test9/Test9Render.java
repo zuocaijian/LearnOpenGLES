@@ -37,7 +37,7 @@ public class Test9Render implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        GLES20.glViewport();
+        GLES20.glViewport(0, 0, width, height);
 
     }
 
@@ -66,11 +66,11 @@ public class Test9Render implements GLSurfaceView.Renderer {
         mHandler.post(() -> {
             mCamera = Camera.open(mBackCameraId);
             Camera.Parameters parameters = mCamera.getParameters();
-            parameters.setPreviewSize();
+            //parameters.setPreviewSize();
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-            parameters.setPreviewFpsRange();
+            //parameters.setPreviewFpsRange();
             mCamera.setParameters(parameters);
-            mCamera.setDisplayOrientation();
+            //mCamera.setDisplayOrientation();
         });
     }
 }
