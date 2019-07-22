@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
@@ -110,7 +109,6 @@ public class Test9Render implements GLSurfaceView.Renderer {
             mCamera.setParameters(parameters);
             //mCamera.setDisplayOrientation();
             mSemaphore.release();
-            Log.i("zcjLog", "cameraInit, open ok");
         });
     }
 
@@ -120,7 +118,6 @@ public class Test9Render implements GLSurfaceView.Renderer {
                 mCamera.setPreviewTexture(mSurfaceTexture);
                 mCamera.startPreview();
                 mSemaphore.release();
-                Log.i("zcjLog", "cameraStart, startPreview");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -137,7 +134,6 @@ public class Test9Render implements GLSurfaceView.Renderer {
             mSurfaceTexture = new SurfaceTexture(mTextureId);
             mSurfaceTexture.setOnFrameAvailableListener(new Test9OnFrameAvailableListener(), mSurfaceTextureAvailableHandler);
             mSemaphore.release();
-            Log.i("zcjLog", "surfaceCreated sdk >= 21");
         } else {
             Semaphore semaphore = new Semaphore(1);
             try {
@@ -153,11 +149,11 @@ public class Test9Render implements GLSurfaceView.Renderer {
                             notifyAll();
                             semaphore.release();
                             mSemaphore.release();
-                            Log.i("zcjLog", "surfaceCreated sdk < 21");
                         }
                         Looper.loop();
                     }
                 };
+                mSurfaceTextureAvailableThread.start();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -168,8 +164,6 @@ public class Test9Render implements GLSurfaceView.Renderer {
         mCameraDrawer.init(width, height);
         mSemaphore.release();
         mGLSurfaceView.queueEvent(() -> mSurfaceTexture.updateTexImage());
-
-        Log.i("zcjLog", "surfaceChanged");
     }
 
     private class Test9OnFrameAvailableListener implements SurfaceTexture.OnFrameAvailableListener {
