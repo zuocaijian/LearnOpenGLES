@@ -54,6 +54,7 @@ public class Test9Util {
         GLES20.glAttachShader(program, fragmentShader);
         GLES20.glLinkProgram(program);
         int[] status = new int[1];
+        GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS, status, 0);
         if (status[0] != GLES20.GL_TRUE) {
             Log.e(Test9Activity.TAG, "Could not link program: " + program);
             Log.e(Test9Activity.TAG, "GLES20 Error: " + GLES20.glGetProgramInfoLog(program));
@@ -63,7 +64,7 @@ public class Test9Util {
         return program;
     }
 
-    private int createTextureId() {
+    public static int createTextureId() {
         int[] texture = new int[1];
         GLES20.glGenTextures(1, texture, 0);
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, texture[0]);
