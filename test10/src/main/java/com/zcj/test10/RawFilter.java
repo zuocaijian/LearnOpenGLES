@@ -16,7 +16,7 @@ public class RawFilter {
     private int mTextureHandler;
 
     public RawFilter() {
-        int vertexShader = Test10Util.loadShader(Test10Activity.APP.getResources(), GLES20.GL_VERTEX_SHADER, "t10_shader_vertex_fbo.glsl");
+        int vertexShader = Test10Util.loadShader(Test10Activity.APP.getResources(), GLES20.GL_VERTEX_SHADER, "t10_shader_vertex_fbo_raw.glsl");
         int fragmentShader = Test10Util.loadShader(Test10Activity.APP.getResources(), GLES20.GL_FRAGMENT_SHADER, "t10_shader_fragment_fbo_raw.glsl");
         mProgram = Test10Util.createOpenGLESProgram(vertexShader, fragmentShader);
     }
