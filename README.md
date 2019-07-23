@@ -30,6 +30,7 @@
     - 专栏博文 [Android OpenGLES2.0（八）——纹理贴图之显示图片](https://blog.csdn.net/junzia/article/details/52842816)
     - 《OpenGL ES应用开发实践指南 Android卷》第7章：绘制纹理的流程和代码细节
     - [Android OpenGL 纹理坐标原点位置](https://www.jianshu.com/p/6c4c7426eef3)：探究Android中OpenGL ES纹理坐标原点
+    - 纹理贴图投影矩阵参数计算总结：![总结](note_pic_1.png)
 7. test7 处理图片(图片滤镜)
   参考资料：
     - 专栏博文 [Android OpenGLES2.0（九）——利用OpenGL进行图片处理](https://blog.csdn.net/junzia/article/details/52902189)

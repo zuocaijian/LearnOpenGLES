@@ -54,6 +54,8 @@ public class ImageTexture {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         mBitmap = BitmapFactory.decodeResource(Test6Activity.APP.getResources(), R.drawable.t6_test, options);
+        //mBitmap = BitmapFactory.decodeResource(Test6Activity.APP.getResources(), R.drawable.t6_p1, options);
+        //mBitmap = BitmapFactory.decodeResource(Test6Activity.APP.getResources(), R.drawable.t6_p2, options);
 
         ByteBuffer bb = ByteBuffer.allocateDirect(sPos.length * 4);
         bb.order(ByteOrder.nativeOrder());
@@ -82,7 +84,7 @@ public class ImageTexture {
         int h = mBitmap.getHeight();
         float sWH = w / (float) h;
 
-        if (width > height) {
+        /*if (width > height) {
             if (sWH > ratio) {
                 Matrix.orthoM(mProjectionMatrix, 0, -ratio * sWH, ratio * sWH, -1.0f, 1.0f, 3.0f, 7.0f);
             } else {
@@ -94,7 +96,12 @@ public class ImageTexture {
             } else {
                 Matrix.orthoM(mProjectionMatrix, 0, -1, 1, -1.0f / ratio, 1.0f / ratio, 3.0f, 7.0f);
             }
-        }
+        }*/
+        //参数总结：如果某个方向希望填充满屏幕，则其坐标范围为[-1.0, 1.0]，由于同时希望图片纹理不变形，所以另外一边需要根据视口长宽比和纹理长宽比计算得出
+        //如果希望图片宽度填充满屏幕，且图片不变形，则
+        Matrix.orthoM(mProjectionMatrix, 0, -1.0f, 1.0f, -sWH / ratio, sWH / ratio, 3.0f, 7.0f);
+        //如果希望图片高度填充满屏幕，且图片不变形，则
+        //Matrix.orthoM(mProjectionMatrix, 0, -ratio / sWH, ratio / sWH, -1.0f, 1.0f, 3.0f, 7.0f);
 
         Matrix.setLookAtM(mViewMatrix, 0, 0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         Matrix.setIdentityM(mModelMatrix, 0);
