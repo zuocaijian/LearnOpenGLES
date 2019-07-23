@@ -42,7 +42,7 @@ public class CameraDrawer {
     private FloatBuffer mPositionBuffer;
     private FloatBuffer mCoordinateBuffer;
 
-    public void init(int width, int height) {
+    public void init(int viewWidth, int viewHeight, int textureWidth, int textureHeight) {
 
         ByteBuffer bb = ByteBuffer.allocateDirect(mPositions.length * 4);
         bb.order(ByteOrder.nativeOrder());
@@ -60,9 +60,22 @@ public class CameraDrawer {
         int fragmentShader = Test9Util.loadShader(Test9Activity.APP.getResources(), GLES20.GL_FRAGMENT_SHADER, "t9_shader_fragment_camera.glsl");
         mProgram = Test9Util.createOpenGLESProgram(vertexShader, fragmentShader);
 
-        float ratio = (float) width / height;
-        Matrix.orthoM(mProjectionMatrix, 0, -ratio, ratio, -1.0f, 1.0f, 3.0f, 7.0f);
-        Matrix.setLookAtM(mViewMatrix, 0, 0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        float ratio = (float) viewWidth / viewHeight;
+        float textureRatio = (float) textureWidth / textureHeight;
+        //如果希望预览图宽度填充满可视区域的宽，且预览图不变形，则
+        //Matrix.orthoM(mProjectionMatrix, 0, -1.0f, 1.0f, -textureRatio / ratio, textureRatio / ratio, 3.0f, 7.0f);
+        //如果希望预览图高度填充满可视区域的高，且预览图不变形，则
+        //Matrix.orthoM(mProjectionMatrix, 0, -ratio / textureRatio, ratio / textureRatio, -1.0f, 1.0f, 3.0f, 7.0f);
+
+        //在上面两点的基础上，我们希望无论如何预览图能填充满整个可视区域，
+        //也即预览图长宽中较小的一边能填充满可视区域相应的一边，预览图长款中较大的一边会被裁剪
+        if (textureRatio > ratio) {
+            Matrix.orthoM(mProjectionMatrix, 0, -ratio / textureRatio, ratio / textureRatio, -1.0f, 1.0f, 3.0f, 7.0f);
+        } else {
+            Matrix.orthoM(mProjectionMatrix, 0, -1.0f, 1.0f, -textureRatio / ratio, textureRatio / ratio, 3.0f, 7.0f);
+        }
+
+        Matrix.setLookAtM(mViewMatrix, 0, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         Matrix.setIdentityM(mModelMatrix, 0);
 
         float[] tmpMatrix = new float[16];

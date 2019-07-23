@@ -4,6 +4,7 @@ import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.Matrix;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -64,11 +65,12 @@ public class Test9Render implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         //1、用创建好的SurfaceTexture作为相机的预览，在相机操作线程中打开摄像头
-        //2、等待摄像头打开后进行后续操作，如计算变换矩阵等
+        //2、根据GLSurfaceView的可视区域大小，设置相机的最佳预览尺寸和拍照尺寸
+        //3、等待摄像头打开后进行后续操作，如计算变换矩阵等
         GLES20.glViewport(0, 0, width, height);
         try {
             mSemaphore.acquire();
-            cameraStart();
+            cameraStart(width, height);
             mSemaphore.acquire();
             surfaceChanged(width, height);
         } catch (InterruptedException e) {
@@ -107,14 +109,15 @@ public class Test9Render implements GLSurfaceView.Renderer {
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
             //parameters.setPreviewFpsRange();
             mCamera.setParameters(parameters);
-            //mCamera.setDisplayOrientation();
+            mCamera.setDisplayOrientation(90);
             mSemaphore.release();
         });
     }
 
-    private void cameraStart() {
+    private void cameraStart(int width, int height) {
         mHandler.post(() -> {
             try {
+                CameraUtil.setPropSize(mCamera, width, height);
                 mCamera.setPreviewTexture(mSurfaceTexture);
                 mCamera.startPreview();
                 mSemaphore.release();
@@ -161,7 +164,8 @@ public class Test9Render implements GLSurfaceView.Renderer {
     }
 
     private void surfaceChanged(int width, int height) {
-        mCameraDrawer.init(width, height);
+        Camera.Size previewSize = mCamera.getParameters().getPreviewSize();
+        mCameraDrawer.init(width, height, previewSize.height, previewSize.width);
         mSemaphore.release();
         mGLSurfaceView.queueEvent(() -> mSurfaceTexture.updateTexImage());
     }
